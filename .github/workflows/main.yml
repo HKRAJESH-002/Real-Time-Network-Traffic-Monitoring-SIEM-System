@@ -1,0 +1,39 @@
+name: NetScope CI/CD
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1️⃣ Checkout code
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    # 2️⃣ Setup Node
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    # 3️⃣ Install Backend
+    - name: Install Backend Dependencies
+      run: npm install
+
+    # 4️⃣ Run Backend (basic check)
+    - name: Run Backend Server Check
+      run: node server.js & sleep 5
+
+    # 5️⃣ Frontend Build
+    - name: Build Frontend
+      run: |
+        cd netscope-frontend
+        npm install
+        npm run build
+
+    # 6️⃣ Security Check 🔐
+    - name: Security Audit
+      run: npm audit
