@@ -2,73 +2,34 @@
 <img width="956" height="382" alt="dashborad2" src="https://github.com/user-attachments/assets/a9fc5291-177a-41b6-b8d9-642d3fbcbcc3" />
 # 🚀 NetScope: Real-Time Network Traffic Monitoring & SIEM System
 
+![CI](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/main.yml/badge.svg)
+
 ---
 
 ## 🧠 Project Overview
 
-**NetScope** is a **real-time network traffic monitoring and SIEM (Security Information and Event Management) system** that captures, analyzes, and visualizes network packets.
+**NetScope** is a real-time **Network Traffic Monitoring and SIEM (Security Information and Event Management) system** designed to capture, analyze, and visualize network packets.
 
-It simulates how real-world cybersecurity tools:
+It simulates real-world cybersecurity tools used in enterprises for:
 
-* 📡 Monitor network traffic
-* 🔍 Analyze protocols
-* ⚠️ Detect suspicious activity
-* 📊 Provide actionable insights via dashboards
+* 📡 Monitoring network traffic
+* 🔍 Protocol analysis
+* ⚠️ Suspicious activity detection
+* 📊 Real-time dashboards and analytics
 
 ---
 
 ## 🔥 Key Features
 
-* 📡 **Real-Time Packet Capture using Tshark (Wireshark CLI)**
-* 🧠 **Protocol Analysis & OSI Layer Mapping**
-* ⚠️ **Suspicious Traffic Detection**
-* 🔐 **JWT-Based Authentication System**
-* ☁️ **Cloud Database Integration (Supabase)**
-* 🚀 **Backend Deployment on Render**
-* 🌐 **Frontend Dashboard (React + Vercel)**
-* 📊 **Live Charts & Traffic Statistics**
-
----
-
-## 📡 Packet Capture Engine (Tshark)
-
-NetScope uses **Tshark (Wireshark CLI)** to capture live network packets.
-
-### 🔧 How It Works
-
-* Captures packets from network interface
-* Extracts:
-
-  * 🌐 Source IP
-  * 🌐 Destination IP
-  * 🔁 Protocol
-  * 🌍 Website (DNS/HTTP)
-
----
-
-### ⚙️ Tshark Command
-
-```bash
-tshark -i <interface> -l -T fields \
--e ip.src -e ip.dst -e _ws.col.Protocol \
--e dns.qry.name -e http.host
-```
-
----
-
-### 🔄 Data Flow
-
-```text
-Tshark → capture.js → Backend API → Supabase → Frontend Dashboard
-```
-
----
-
-### ⚠️ Limitations
-
-* Requires admin/root access
-* Runs locally (not supported on cloud platforms)
-* Needs correct network interface configuration
+* 📡 Real-time packet capture using Tshark
+* 🧠 Protocol analysis with OSI layer mapping
+* ⚠️ Suspicious traffic detection
+* 🔐 JWT-based authentication system
+* ☁️ Cloud database integration (Supabase)
+* 🚀 Backend deployed on Render
+* 🌐 Frontend dashboard (React + Vercel)
+* 📊 Live charts and traffic statistics
+* 🔄 CI/CD pipeline using GitHub Actions
 
 ---
 
@@ -88,6 +49,32 @@ Frontend Dashboard (Vercel)
 
 ---
 
+## 📡 Packet Capture Engine
+
+NetScope uses **Tshark (Wireshark CLI)** to capture live network packets.
+
+### ⚙️ Command
+
+```bash
+tshark -i <interface> -l -T fields \
+-e ip.src -e ip.dst -e _ws.col.Protocol \
+-e dns.qry.name -e http.host
+```
+
+### 🔄 Data Flow
+
+```text
+Tshark → capture.js → Backend → Supabase → Frontend
+```
+
+### ⚠️ Limitations
+
+* Requires admin/root access
+* Runs locally (not supported in cloud CI/CD)
+* Needs correct network interface
+
+---
+
 ## 🛠️ Tech Stack
 
 ### 🔹 Backend
@@ -100,83 +87,117 @@ Frontend Dashboard (Vercel)
 ### 🔹 Frontend
 
 * React.js
-* Recharts (Charts)
+* Recharts
 
-### 🔹 Tools & Deployment
+### 🔹 Deployment & Tools
 
-* Tshark (Packet Capture)
-* Render (Backend)
-* Vercel (Frontend)
-* Supabase (Database)
-
----
-
-## ⚙️ How It Works (Step-by-Step)
-
-### 1️⃣ Packet Capture
-
-* Tshark captures live traffic
-* Extracts IPs, protocol, domain
+* Tshark
+* Render
+* Vercel
+* Supabase
+* GitHub Actions (CI/CD)
 
 ---
 
-### 2️⃣ Data Processing
+## ⚙️ How It Works
 
-* Protocol normalization (HTTP, TCP, TLS)
-* OSI Layer Mapping:
-
-  * HTTP → Layer 7
-  * TLS → Layer 6
-  * TCP → Layer 4
-
----
-
-### 3️⃣ Threat Detection ⚠️
-
-* HTTP traffic flagged
-* Unknown protocols flagged
-* Suspicious packets stored
+1. 📡 Capture packets using Tshark
+2. 🧠 Process and normalize protocols
+3. ⚠️ Detect suspicious traffic
+4. 🗄️ Store data in Supabase
+5. 📊 Display insights on dashboard
+6. 🔄 Auto-update every 5 seconds
 
 ---
 
-### 4️⃣ Backend API
+## 🔐 Security Features
 
-* Built with Express.js
-* Handles:
-
-  * Data storage
-  * Filtering
-  * Analytics
+* 🔑 JWT Authentication
+* 🔒 Password hashing (bcrypt)
+* 🔐 Environment variables for secrets
+* ☁️ Secure database connection
 
 ---
 
-### 5️⃣ Database (Supabase)
+## 🔄 CI/CD Pipeline
 
-* PostgreSQL cloud DB
-* Stores:
+This project uses **GitHub Actions** to automate testing, build, and security checks.
 
-  * Packet logs
-  * Protocol data
-  * Threat flags
+### 🚀 Pipeline Steps
+
+* Checkout code
+* Setup Node.js
+* Install dependencies
+* Run backend health check
+* Build frontend
+* Perform security audit
+
+### ⚙️ Workflow File
+
+```yaml
+name: NetScope CI/CD
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install Backend Dependencies
+      run: npm install
+
+    - name: Run Backend Server Check
+      run: node server.js & sleep 5
+
+    - name: Build Frontend
+      run: |
+        cd netscope-frontend
+        npm install
+        npm run build
+
+    - name: Security Audit
+      run: npm audit
+```
 
 ---
 
-### 6️⃣ Frontend Dashboard
+## 🧪 Local Setup
 
-* Displays:
+### 🔹 Backend
 
-  * 📊 Statistics
-  * 📡 Packet logs
-  * ⚠️ Alerts
-* Auto-refresh every 5 seconds
+```bash
+npm install
+node server.js
+```
+
+### 🔹 Frontend
+
+```bash
+cd netscope-frontend
+npm install
+npm start
+```
 
 ---
 
-### 7️⃣ Deployment 🚀
+## 🔐 Environment Variables
 
-* Backend → Render
-* Frontend → Vercel
-* Database → Supabase
+```env
+DATABASE_URL=your_database_url
+SUPABASE_URL=your_supabase_url
+SUPABASE_KEY=your_supabase_key
+```
 
 ---
 
@@ -192,16 +213,15 @@ Frontend Dashboard (Vercel)
 
 ---
 
-## 🔐 Security Features
+## 🚀 Deployment
 
-* 🔑 JWT Authentication
-* 🔒 Password hashing (bcrypt)
-* 🔐 Environment variables for secrets
-* ☁️ SSL-secured DB connection
+* Backend → Render
+* Frontend → Vercel
+* Database → Supabase
 
 ---
 
-## 🚀 API Endpoints
+## 📡 API Endpoints
 
 | Method | Endpoint        | Description    |
 | ------ | --------------- | -------------- |
@@ -214,63 +234,32 @@ Frontend Dashboard (Vercel)
 
 ---
 
-## 🧪 How to Run Locally
-
-### 🔹 Backend
-
-```bash
-npm install
-node server.js
-```
-
----
-
-### 🔹 Frontend
-
-```bash
-cd netscope-frontend
-npm install
-npm start
-```
-
----
-
-### 🔹 Environment Variables
-
-```env
-DATABASE_URL=your_database_url
-SUPABASE_URL=your_supabase_url
-SUPABASE_KEY=your_supabase_key
-```
-
----
-
-## 🧠 What I Learned
-
-* ⚙️ Full-stack development
-* 🔐 Secure backend design
-* ☁️ Cloud deployment
-* 🧠 Network traffic analysis
-* 📡 Packet inspection using Tshark
-* 🔍 Debugging real-world issues
-
----
-
 ## 💼 Use Case
 
 This system simulates:
 
 * SIEM platforms
 * Intrusion Detection Systems (IDS)
-* Network monitoring tools used in enterprises
+* Enterprise network monitoring tools
+
+---
+
+## 🧠 What I Learned
+
+* Full-stack development
+* Secure backend design
+* CI/CD pipeline implementation
+* Cloud deployment
+* Network traffic analysis
+* Debugging real-world issues
 
 ---
 
 ## 🚀 Future Improvements
 
-* 🔔 Real-time alert system
-* 📈 Advanced analytics dashboard
+* 🔔 Real-time alerts (Email/Telegram)
 * 🤖 AI-based anomaly detection
+* 📈 Advanced analytics
 * 🌍 Multi-device monitoring
 
 ---
@@ -286,4 +275,5 @@ This system simulates:
 If you like this project, give it a ⭐ on GitHub!
 
 ---
+
 
