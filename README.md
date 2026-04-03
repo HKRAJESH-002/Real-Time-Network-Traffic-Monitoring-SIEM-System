@@ -1,5 +1,6 @@
 <img width="942" height="393" alt="dashbord1" src="https://github.com/user-attachments/assets/4802e6b1-4a74-4aa2-8c7f-b7277748dae3" />
 <img width="956" height="382" alt="dashborad2" src="https://github.com/user-attachments/assets/a9fc5291-177a-41b6-b8d9-642d3fbcbcc3" />
+![CI](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/main.yml/badge.svg)
 # 🚀 NetScope: Real-Time Network Traffic Monitoring & SIEM System
 
 ---
